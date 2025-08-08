@@ -250,8 +250,10 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // API Base URL - Update this when deployed
-        const API_BASE = window.location.origin;
+        // Use TMDb API directly for Vercel deployment
+        const TMDB_API_KEY = '8265bd1679663a7ea12ac168da84d2e8'; // Public demo key
+        const TMDB_BASE = 'https://api.themoviedb.org/3';
+        const IMAGE_BASE = 'https://image.tmdb.org/t/p/w500';
 
         let movieOffset = 0;
         
@@ -260,43 +262,47 @@
             resultDiv.innerHTML = '<div class="spinner-border text-primary" role="status"></div>';
             
             try {
-                const response = await fetch(`${API_BASE}/api/v1/movies/recommendations/?type=popular`);
-                const movies = await response.json();
+                const response = await fetch(`${TMDB_BASE}/movie/popular?api_key=${TMDB_API_KEY}&page=1`);
+                const data = await response.json();
                 
                 // Show different movies each time by using offset
-                const startIndex = movieOffset % movies.length;
-                const selectedMovies = movies.slice(startIndex, startIndex + 4);
+                const startIndex = movieOffset % data.results.length;
+                const selectedMovies = data.results.slice(startIndex, startIndex + 4);
                 
                 // If we don't have enough movies, wrap around
                 if (selectedMovies.length < 4) {
-                    selectedMovies.push(...movies.slice(0, 4 - selectedMovies.length));
+                    selectedMovies.push(...data.results.slice(0, 4 - selectedMovies.length));
                 }
                 
                 let html = '<div class="row">';
                 selectedMovies.forEach(movie => {
+                    const posterUrl = movie.poster_path ? `${IMAGE_BASE}${movie.poster_path}` : 'https://via.placeholder.com/200x300?text=No+Image';
                     html += `
                         <div class="col-md-6 mb-2">
                             <div class="card">
-                                <div class="card-body">
-                                    <h6 class="card-title">${movie.title}</h6>
-                                    <p class="card-text">
-                                        <small class="text-muted">
-                                            ⭐ ${movie.vote_average}/10 | 
-                                            📅 ${movie.release_date || 'Unknown'}
-                                        </small>
-                                    </p>
+                                <div class="row g-0">
+                                    <div class="col-4">
+                                        <img src="${posterUrl}" class="img-fluid rounded-start" alt="${movie.title}" style="height: 120px; object-fit: cover;">
+                                    </div>
+                                    <div class="col-8">
+                                        <div class="card-body p-2">
+                                            <h6 class="card-title">${movie.title}</h6>
+                                            <p class="card-text small">${movie.overview ? movie.overview.substring(0, 80) + '...' : 'No description available'}</p>
+                                            <small class="text-muted">⭐ ${movie.vote_average}/10</small>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     `;
                 });
                 html += '</div>';
-                html += '<p class="text-muted mt-2"><small>Click again to see more movies!</small></p>';
-                resultDiv.innerHTML = html;
                 
-                // Increment offset for next click
-                movieOffset += 4;
+                resultDiv.innerHTML = html;
+                movieOffset += 4; // Move to next set of movies
+                
             } catch (error) {
+                console.error('Error fetching movies:', error);
                 resultDiv.innerHTML = `<div class="alert alert-danger">Error: ${error.message}</div>`;
             }
         }
@@ -306,26 +312,27 @@
             resultDiv.innerHTML = '<div class="spinner-border text-success" role="status"></div>';
             
             try {
-                const response = await fetch(`${API_BASE}/api/v1/movies/genres/`);
+                const response = await fetch(`${TMDB_BASE}/genre/movie/list?api_key=${TMDB_API_KEY}`);
                 const data = await response.json();
                 
-                // Handle both paginated and non-paginated responses
-                const genres = data.results || data;
+                const genres = data.genres;
                 
                 let html = '<div class="d-flex flex-wrap">';
                 genres.forEach(genre => {
                     html += `<span class="badge bg-secondary me-1 mb-1" 
                                   style="cursor: pointer; transition: all 0.3s ease;" 
-                                  onclick="fetchMoviesByGenre(${genre.tmdb_id}, '${genre.name}')"
+                                  onclick="fetchMoviesByGenre(${genre.id}, '${genre.name}')"
                                   onmouseover="this.style.backgroundColor='#0d6efd'"
                                   onmouseout="this.style.backgroundColor='#6c757d'">
                                   ${genre.name}
                              </span>`;
                 });
                 html += '</div>';
-                html += '<p class="text-muted mt-2"><small>Click on any genre to see movies!</small></p>';
+                
                 resultDiv.innerHTML = html;
+                
             } catch (error) {
+                console.error('Error fetching genres:', error);
                 resultDiv.innerHTML = `<div class="alert alert-danger">Error: ${error.message}</div>`;
             }
         }
@@ -336,7 +343,7 @@
                                    <p class="mt-2">Loading ${genreName} movies...</p>`;
             
             try {
-                const response = await fetch(`${API_BASE}/api/v1/movies/?genre=${genreId}`);
+                const response = await fetch(`${TMDB_BASE}/discover/movie?api_key=${TMDB_API_KEY}&with_genres=${genreId}&page=1`);
                 const data = await response.json();
                 
                 // Handle paginated response
@@ -351,17 +358,21 @@
                 html += '<div class="row">';
                 
                 movies.slice(0, 4).forEach(movie => {
+                    const posterUrl = movie.poster_path ? `${IMAGE_BASE}${movie.poster_path}` : 'https://via.placeholder.com/200x300?text=No+Image';
                     html += `
                         <div class="col-md-6 mb-2">
                             <div class="card">
-                                <div class="card-body">
-                                    <h6 class="card-title">${movie.title}</h6>
-                                    <p class="card-text">
-                                        <small class="text-muted">
-                                            ⭐ ${movie.vote_average}/10 | 
-                                            📅 ${movie.release_date || 'Unknown'}
-                                        </small>
-                                    </p>
+                                <div class="row g-0">
+                                    <div class="col-4">
+                                        <img src="${posterUrl}" class="img-fluid rounded-start" alt="${movie.title}" style="height: 120px; object-fit: cover;">
+                                    </div>
+                                    <div class="col-8">
+                                        <div class="card-body p-2">
+                                            <h6 class="card-title">${movie.title}</h6>
+                                            <p class="card-text small">${movie.overview ? movie.overview.substring(0, 80) + '...' : 'No description available'}</p>
+                                            <small class="text-muted">⭐ ${movie.vote_average}/10</small>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

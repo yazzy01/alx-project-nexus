@@ -314,12 +314,64 @@
                 
                 let html = '<div class="d-flex flex-wrap">';
                 genres.forEach(genre => {
-                    html += `<span class="badge bg-secondary me-1 mb-1">${genre.name}</span>`;
+                    html += `<span class="badge bg-secondary me-1 mb-1" 
+                                  style="cursor: pointer; transition: all 0.3s ease;" 
+                                  onclick="fetchMoviesByGenre(${genre.tmdb_id}, '${genre.name}')"
+                                  onmouseover="this.style.backgroundColor='#0d6efd'"
+                                  onmouseout="this.style.backgroundColor='#6c757d'">
+                                  ${genre.name}
+                             </span>`;
                 });
                 html += '</div>';
+                html += '<p class="text-muted mt-2"><small>Click on any genre to see movies!</small></p>';
                 resultDiv.innerHTML = html;
             } catch (error) {
                 resultDiv.innerHTML = `<div class="alert alert-danger">Error: ${error.message}</div>`;
+            }
+        }
+
+        async function fetchMoviesByGenre(genreId, genreName) {
+            const resultDiv = document.getElementById('movies-result');
+            resultDiv.innerHTML = `<div class="spinner-border text-primary" role="status"></div>
+                                   <p class="mt-2">Loading ${genreName} movies...</p>`;
+            
+            try {
+                const response = await fetch(`${API_BASE}/api/v1/movies/?genre=${genreId}`);
+                const data = await response.json();
+                
+                // Handle paginated response
+                const movies = data.results || data;
+                
+                if (movies.length === 0) {
+                    resultDiv.innerHTML = `<div class="alert alert-info">No ${genreName} movies found in our database yet.</div>`;
+                    return;
+                }
+                
+                let html = `<h6 class="text-primary mb-3"><i class="fas fa-tag me-2"></i>${genreName} Movies</h6>`;
+                html += '<div class="row">';
+                
+                movies.slice(0, 4).forEach(movie => {
+                    html += `
+                        <div class="col-md-6 mb-2">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h6 class="card-title">${movie.title}</h6>
+                                    <p class="card-text">
+                                        <small class="text-muted">
+                                            ⭐ ${movie.vote_average}/10 | 
+                                            📅 ${movie.release_date || 'Unknown'}
+                                        </small>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+                html += '</div>';
+                html += `<p class="text-muted mt-2"><small>Showing ${Math.min(4, movies.length)} of ${movies.length} ${genreName} movies</small></p>`;
+                resultDiv.innerHTML = html;
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="alert alert-danger">Error loading ${genreName} movies: ${error.message}</div>`;
             }
         }
 

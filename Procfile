@@ -1,1 +1,1 @@
-web: python manage.py migrate && python manage.py collectstatic --noinput && python manage.py setup_initial_data --skip-movies && gunicorn movie_recommendation_backend.wsgi:application --bind 0.0.0.0:$PORT
+web: python manage.py migrate && python manage.py collectstatic --noinput && gunicorn movie_recommendation_backend.wsgi:application --bind 0.0.0.0:$PORT

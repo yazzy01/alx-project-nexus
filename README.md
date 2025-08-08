@@ -1,281 +1,379 @@
-# ALX Project Nexus - ProDev Backend Engineering Documentation
+# Movie Recommendation Backend - ALX Project Nexus
 
-## Overview
+[![Django](https://img.shields.io/badge/Django-5.2.5-green.svg)](https://www.djangoproject.com/)
+[![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/)
+[![DRF](https://img.shields.io/badge/DRF-3.16.0-red.svg)](https://www.django-rest-framework.org/)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Welcome to **ALX Project Nexus**, a comprehensive documentation hub for the **ProDev Backend Engineering Program**. This repository serves as a knowledge base showcasing the understanding of backend engineering concepts, tools, and best practices acquired throughout the intensive program.
+A comprehensive movie recommendation backend API built with Django REST Framework, featuring user authentication, movie discovery, personalized recommendations, and comprehensive API documentation.
 
-## Project Objective
+## 🎬 Project Overview
 
-The primary objectives of this project are to:
+This project is part of the **ALX Project Nexus - ProDev Backend Engineering Program** and demonstrates real-world backend development practices including:
 
-- **Consolidate key learnings** from the ProDev Backend Engineering program
-- **Document major backend technologies**, concepts, challenges, and solutions
-- **Serve as a reference guide** for both current and future learners
-- **Foster collaboration** between frontend and backend learners
-- **Showcase real-world application** through practical project implementations
+- **RESTful API Development** with Django REST Framework
+- **Third-party API Integration** with The Movie Database (TMDb)
+- **Caching Strategies** using Redis for performance optimization
+- **User Authentication & Authorization** with Token-based authentication
+- **Background Task Processing** with Celery
+- **Comprehensive API Documentation** with Swagger/OpenAPI
+- **Database Design & Optimization** with proper indexing and relationships
 
-## Key Technologies Covered
+## 🚀 Key Features
 
-### Core Backend Technologies
-- **Python**: Primary programming language for backend development
-- **Django**: Web framework for rapid development and clean design
-- **REST APIs**: Building scalable and maintainable web services
-- **GraphQL**: Modern API query language for efficient data fetching
-- **Docker**: Containerization for consistent development environments
-- **CI/CD**: Continuous Integration and Continuous Deployment pipelines
+### 🎭 Movie Management
+- **Movie Discovery**: Browse trending, popular, top-rated, and upcoming movies
+- **Advanced Search**: Search movies by title, genre, year, and rating
+- **Movie Details**: Comprehensive movie information with posters and backdrops
+- **Genre Filtering**: Filter movies by multiple genres
 
-### Database & Data Management
-- **PostgreSQL**: Advanced relational database management
-- **Database Design**: Normalization, indexing, and optimization strategies
-- **ORM (Object-Relational Mapping)**: Django ORM for database interactions
-- **Data Migrations**: Managing database schema changes
+### 👤 User Management
+- **User Registration & Authentication**: Secure user registration and login
+- **User Profiles**: Customizable user profiles with preferences
+- **Activity Tracking**: Track user interactions and behavior
+- **Privacy Settings**: Configurable privacy and notification preferences
 
-### Performance & Scalability
-- **Caching Strategies**: Redis implementation for performance optimization
-- **Asynchronous Programming**: Handling concurrent operations efficiently
-- **Message Queues**: RabbitMQ and Celery for background task processing
-- **Load Balancing**: Distributing traffic across multiple servers
+### ⭐ Personal Features
+- **Favorites**: Save and manage favorite movies
+- **Watchlist**: Create and manage personal watchlists
+- **Movie Ratings**: Rate and review movies
+- **Personalized Recommendations**: AI-powered movie suggestions
 
-### DevOps & Deployment
-- **Docker Containerization**: Creating portable application environments
-- **CI/CD Pipelines**: Automated testing and deployment workflows
-- **Cloud Deployment**: Hosting applications on cloud platforms
-- **Monitoring & Logging**: Application performance tracking
+### 🔧 Technical Features
+- **Caching**: Redis-based caching for improved performance
+- **Background Tasks**: Celery for asynchronous processing
+- **API Documentation**: Interactive Swagger documentation
+- **Error Handling**: Comprehensive error handling and logging
+- **Data Validation**: Robust input validation and sanitization
 
-## Important Backend Development Concepts
+## 🛠 Technology Stack
 
-### 1. API Design & Development
-- **RESTful Architecture**: Following REST principles for API design
-- **HTTP Methods**: Proper usage of GET, POST, PUT, DELETE, PATCH
-- **Status Codes**: Implementing appropriate HTTP response codes
-- **API Versioning**: Managing API evolution and backward compatibility
-- **Authentication & Authorization**: JWT tokens, OAuth, and security best practices
+### Backend Framework
+- **Django 5.2.5**: Web framework
+- **Django REST Framework 3.16.0**: API development
+- **Python 3.8+**: Programming language
 
-### 2. Database Design & Optimization
-- **Relational Database Design**: Entity-relationship modeling
-- **Query Optimization**: Writing efficient database queries
-- **Indexing Strategies**: Improving query performance
-- **Database Transactions**: Ensuring data consistency and integrity
+### Database & Caching
+- **SQLite**: Default database (easily configurable to PostgreSQL)
+- **Redis**: Caching and session storage
+- **Django ORM**: Database abstraction layer
 
-### 3. System Architecture
-- **Microservices Architecture**: Breaking down monolithic applications
-- **Service Communication**: Inter-service communication patterns
-- **Data Consistency**: Managing distributed data across services
-- **Fault Tolerance**: Building resilient systems
+### Background Processing
+- **Celery**: Asynchronous task processing
+- **Redis**: Message broker for Celery
 
-### 4. Security Best Practices
-- **Input Validation**: Preventing injection attacks
-- **Authentication Systems**: Secure user authentication mechanisms
-- **Data Encryption**: Protecting sensitive data at rest and in transit
-- **CORS Configuration**: Managing cross-origin resource sharing
+### API & Documentation
+- **drf-yasg**: Swagger/OpenAPI documentation
+- **Django CORS Headers**: Cross-origin resource sharing
 
-## Challenges Faced & Solutions Implemented
+### External Services
+- **TMDb API**: Movie data source
+- **Requests**: HTTP client for API calls
 
-### Challenge 1: API Performance Optimization
-**Problem**: Slow response times when fetching large datasets from external APIs
-**Solution**: 
-- Implemented Redis caching to store frequently accessed data
-- Added pagination to limit data transfer
-- Used database query optimization techniques
-- Result: 70% improvement in API response times
+## 📋 Prerequisites
 
-### Challenge 2: Database Query Optimization
-**Problem**: Complex queries causing database bottlenecks
-**Solution**:
-- Analyzed query execution plans
-- Added appropriate database indexes
-- Implemented query result caching
-- Used Django ORM select_related() and prefetch_related()
-- Result: Reduced query execution time by 60%
+Before running this project, make sure you have:
 
-### Challenge 3: User Authentication & Security
-**Problem**: Implementing secure user authentication across multiple services
-**Solution**:
-- Implemented JWT-based authentication
-- Added refresh token mechanism
-- Implemented role-based access control (RBAC)
-- Added input validation and sanitization
-- Result: Secure, scalable authentication system
+- **Python 3.8+** installed
+- **Redis** server (for caching and Celery)
+- **Git** for version control
+- **TMDb API Key** (free registration at [TMDb](https://www.themoviedb.org/))
 
-### Challenge 4: Asynchronous Task Processing
-**Problem**: Long-running tasks blocking API responses
-**Solution**:
-- Integrated Celery with RabbitMQ for background task processing
-- Implemented task queues for different priority levels
-- Added task monitoring and error handling
-- Result: Improved user experience with non-blocking operations
+## 🚀 Quick Start
 
-## Best Practices & Personal Takeaways
+### 1. Clone the Repository
+```bash
+git clone https://github.com/yazzy01/alx-project-nexus.git
+cd alx-project-nexus
+```
 
-### Code Quality & Maintainability
-- **Clean Code Principles**: Writing readable and maintainable code
-- **SOLID Principles**: Following object-oriented design principles
-- **Code Documentation**: Comprehensive docstrings and comments
-- **Testing**: Unit tests, integration tests, and test-driven development
-- **Code Reviews**: Collaborative code improvement processes
+### 2. Set Up Virtual Environment
+```bash
+# Create virtual environment
+python -m venv venv
 
-### Development Workflow
-- **Git Workflow**: Feature branches, pull requests, and semantic commits
-- **Environment Management**: Separate development, staging, and production environments
-- **Configuration Management**: Using environment variables for sensitive data
-- **Logging**: Comprehensive logging for debugging and monitoring
+# Activate virtual environment
+# On Windows:
+venv\Scripts\activate
+# On macOS/Linux:
+source venv/bin/activate
+```
 
-### Performance Optimization
-- **Caching Strategies**: Multi-level caching implementation
-- **Database Optimization**: Query optimization and connection pooling
-- **Asynchronous Processing**: Non-blocking operations for better user experience
-- **Resource Management**: Efficient memory and CPU usage
+### 3. Install Dependencies
+```bash
+pip install -r requirements.txt
+```
 
-### Security Mindset
-- **Security by Design**: Incorporating security from the beginning
-- **Regular Security Audits**: Identifying and fixing vulnerabilities
-- **Data Protection**: Implementing proper data handling practices
-- **Compliance**: Following industry standards and regulations
+### 4. Configure Environment Variables
+```bash
+# Copy the example environment file
+cp .env.example .env
 
-## Current Project: Movie Recommendation Backend
+# Edit .env file with your configuration
+# Add your TMDb API key and other settings
+```
 
-### Project Overview
-Currently working on a **Movie Recommendation Backend** that demonstrates real-world application of the learned concepts. This project includes:
+### 5. Set Up Database
+```bash
+# Run database migrations
+python manage.py migrate
 
-- **API Development**: RESTful endpoints for movie data and recommendations
-- **User Management**: JWT-based authentication and user preferences
-- **Performance Optimization**: Redis caching for improved response times
-- **Documentation**: Comprehensive Swagger API documentation
-- **Third-party Integration**: TMDb API integration for movie data
+# Create superuser (optional)
+python manage.py createsuperuser
 
-### Technologies Used
-- **Django**: Backend framework
-- **PostgreSQL**: Primary database
-- **Redis**: Caching layer
-- **Swagger**: API documentation
-- **JWT**: Authentication mechanism
+# Set up initial data (genres and sample movies)
+python manage.py setup_initial_data --create-superuser
+```
 
-### Key Features
-- Movie recommendation algorithms
-- User authentication and authorization
-- Favorite movies management
-- Trending movies API
-- Comprehensive API documentation
-- Performance monitoring and optimization
+### 6. Start Redis Server
+```bash
+# Make sure Redis is running on localhost:6379
+redis-server
+```
 
-## Collaboration & Community
+### 7. Start the Development Server
+```bash
+# Start Django development server
+python manage.py runserver
 
-### Discord Community: `#ProDevProjectNexus`
-Join our dedicated Discord channel to:
-- **Connect** with fellow ProDev Backend and Frontend learners
-- **Exchange ideas** and share knowledge
-- **Ask questions** and get help from peers and mentors
-- **Stay updated** with program announcements and opportunities
-- **Organize study sessions** and coding collaborations
+# In another terminal, start Celery worker (optional)
+celery -A movie_recommendation_backend worker --loglevel=info
+```
 
-### Collaboration Opportunities
-- **Backend-Frontend Integration**: Working with frontend developers to create full-stack applications
-- **Code Reviews**: Peer review sessions for code quality improvement
-- **Knowledge Sharing**: Technical presentations and learning sessions
-- **Project Partnerships**: Collaborative project development
+### 8. Access the Application
+- **API Documentation**: http://localhost:8000/api/docs/
+- **Admin Interface**: http://localhost:8000/admin/
+- **API Base URL**: http://localhost:8000/api/v1/
 
-## Repository Structure
+## 📚 API Documentation
+
+The API is fully documented using Swagger/OpenAPI. Once the server is running, you can access:
+
+- **Swagger UI**: http://localhost:8000/api/docs/
+- **ReDoc**: http://localhost:8000/api/redoc/
+- **OpenAPI Schema**: http://localhost:8000/api/schema/
+
+### 🔑 Authentication
+
+The API uses Token-based authentication. To access protected endpoints:
+
+1. **Register a new user**:
+   ```bash
+   POST /api/v1/users/register/
+   ```
+
+2. **Login to get token**:
+   ```bash
+   POST /api/v1/users/login/
+   ```
+
+3. **Use token in headers**:
+   ```bash
+   Authorization: Token your-token-here
+   ```
+
+### 📖 Main API Endpoints
+
+#### Movies
+- `GET /api/v1/movies/` - List movies with filtering
+- `GET /api/v1/movies/{tmdb_id}/` - Get movie details
+- `GET /api/v1/movies/recommendations/` - Get recommendations
+- `POST /api/v1/movies/search/` - Search movies
+- `GET /api/v1/movies/genres/` - List genres
+
+#### User Management
+- `POST /api/v1/users/register/` - Register new user
+- `POST /api/v1/users/login/` - User login
+- `POST /api/v1/users/logout/` - User logout
+- `GET /api/v1/users/profile/` - Get user profile
+- `GET /api/v1/users/dashboard/` - User dashboard
+
+#### Personal Features
+- `GET /api/v1/movies/favorites/` - User's favorite movies
+- `POST /api/v1/movies/favorites/` - Add to favorites
+- `GET /api/v1/movies/watchlist/` - User's watchlist
+- `GET /api/v1/movies/ratings/` - User's movie ratings
+
+## 🏗 Project Structure
 
 ```
 alx-project-nexus/
-├── README.md                 # This comprehensive documentation
-├── docs/                     # Additional documentation
-│   ├── api-documentation/    # API documentation files
-│   ├── architecture/         # System architecture diagrams
-│   └── tutorials/           # Step-by-step tutorials
-├── projects/                # Individual project implementations
-│   └── movie-recommendation/ # Movie recommendation backend
-├── resources/               # Learning resources and references
-├── challenges/              # Documented challenges and solutions
-└── best-practices/          # Code examples and best practices
+├── movie_recommendation_backend/    # Django project settings
+│   ├── settings.py                 # Main settings
+│   ├── urls.py                     # URL configuration
+│   ├── celery.py                   # Celery configuration
+│   └── wsgi.py                     # WSGI configuration
+├── movies/                         # Movies app
+│   ├── models.py                   # Database models
+│   ├── views.py                    # API views
+│   ├── serializers.py              # Data serializers
+│   ├── services.py                 # Business logic
+│   ├── tasks.py                    # Celery tasks
+│   ├── admin.py                    # Admin configuration
+│   └── urls.py                     # App URLs
+├── users/                          # Users app
+│   ├── models.py                   # User models
+│   ├── views.py                    # User views
+│   ├── serializers.py              # User serializers
+│   └── urls.py                     # User URLs
+├── logs/                           # Application logs
+├── requirements.txt                # Python dependencies
+├── .env                           # Environment variables
+└── README.md                      # This file
 ```
 
-## Getting Started
+## 🗄 Database Schema
 
-### Prerequisites
-- Python 3.8+
-- PostgreSQL
-- Redis
-- Git
-- Docker (optional)
+### Core Models
 
-### Setup Instructions
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/yazzy01/alx-project-nexus.git
-   cd alx-project-nexus
-   ```
+#### Movie
+- Stores movie information from TMDb
+- Includes ratings, popularity, genres
+- Optimized with database indexes
 
-2. Set up virtual environment:
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   ```
+#### User Extensions
+- **UserProfile**: Extended user information
+- **UserPreferences**: User settings and preferences
+- **UserActivity**: Activity tracking
 
-3. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
+#### User Interactions
+- **FavoriteMovie**: User's favorite movies
+- **MovieRating**: User movie ratings and reviews
+- **Watchlist**: User's watchlist
+- **RecommendationHistory**: Recommendation tracking
 
-4. Configure environment variables:
-   ```bash
-   cp .env.example .env
-   # Edit .env with your configuration
-   ```
+## ⚡ Performance Optimization
 
-5. Run database migrations:
-   ```bash
-   python manage.py migrate
-   ```
+### Caching Strategy
+- **Redis Caching**: API responses cached for improved performance
+- **Database Query Optimization**: Efficient queries with select_related
+- **Background Processing**: Heavy tasks processed asynchronously
 
-6. Start the development server:
-   ```bash
-   python manage.py runserver
-   ```
+### Database Optimization
+- **Indexes**: Strategic database indexes for common queries
+- **Query Optimization**: Optimized ORM queries
+- **Connection Pooling**: Efficient database connections
 
-## Contributing
+## 🔧 Configuration
 
-We welcome contributions from the ProDev community! Please follow these guidelines:
+### Environment Variables
 
-1. **Fork** the repository
-2. **Create** a feature branch (`git checkout -b feature/amazing-feature`)
-3. **Commit** your changes (`git commit -m 'feat: add amazing feature'`)
-4. **Push** to the branch (`git push origin feature/amazing-feature`)
-5. **Open** a Pull Request
+Create a `.env` file with the following variables:
 
-### Commit Message Convention
+```env
+# Django Settings
+SECRET_KEY=your-secret-key-here
+DEBUG=True
+ALLOWED_HOSTS=localhost,127.0.0.1
+
+# Database Settings (for PostgreSQL)
+DB_NAME=movie_recommendation_db
+DB_USER=postgres
+DB_PASSWORD=your-password
+DB_HOST=localhost
+DB_PORT=5432
+
+# Redis Settings
+REDIS_URL=redis://localhost:6379/0
+
+# TMDb API Settings
+TMDB_API_KEY=your-tmdb-api-key-here
+TMDB_BASE_URL=https://api.themoviedb.org/3
+
+# JWT Settings
+JWT_SECRET_KEY=your-jwt-secret-key-here
+JWT_ALGORITHM=HS256
+JWT_EXPIRATION_DELTA=3600
+```
+
+## 🧪 Testing
+
+Run the test suite:
+
+```bash
+# Run all tests
+python manage.py test
+
+# Run tests with coverage
+coverage run --source='.' manage.py test
+coverage report
+```
+
+## 📦 Deployment
+
+### Production Checklist
+
+1. **Environment Configuration**:
+   - Set `DEBUG=False`
+   - Configure production database (PostgreSQL)
+   - Set up proper Redis configuration
+   - Configure allowed hosts
+
+2. **Security**:
+   - Use strong secret keys
+   - Enable HTTPS
+   - Configure CORS properly
+   - Set up proper authentication
+
+3. **Performance**:
+   - Configure caching
+   - Set up Celery workers
+   - Optimize database queries
+   - Enable compression
+
+### Docker Deployment (Optional)
+
+```dockerfile
+# Dockerfile example
+FROM python:3.11-slim
+
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+
+COPY . .
+EXPOSE 8000
+
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+```
+
+## 🤝 Contributing
+
+We welcome contributions! Please follow these steps:
+
+1. **Fork the repository**
+2. **Create a feature branch**: `git checkout -b feature/amazing-feature`
+3. **Commit your changes**: `git commit -m 'feat: add amazing feature'`
+4. **Push to the branch**: `git push origin feature/amazing-feature`
+5. **Open a Pull Request**
+
+### Commit Convention
 - `feat:` New features
 - `fix:` Bug fixes
 - `docs:` Documentation updates
 - `perf:` Performance improvements
 - `refactor:` Code refactoring
-- `test:` Adding or updating tests
+- `test:` Adding tests
 
-## Future Roadmap
+## 📝 License
 
-- [ ] Advanced microservices architecture implementation
-- [ ] GraphQL API development
-- [ ] Machine learning integration for recommendations
-- [ ] Real-time features with WebSockets
-- [ ] Advanced monitoring and analytics
-- [ ] Mobile API optimization
-- [ ] Kubernetes deployment configurations
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Contact & Support
-
-- **Discord**: Join `#ProDevProjectNexus` channel
-- **GitHub Issues**: Report bugs or request features
-- **Email**: [Your contact email]
-
-## Acknowledgments
+## 🙏 Acknowledgments
 
 - **ALX ProDev Program**: For providing comprehensive backend engineering education
-- **Mentors and Instructors**: For guidance and support throughout the program
-- **Fellow Learners**: For collaboration and knowledge sharing
+- **The Movie Database (TMDb)**: For providing the movie data API
+- **Django Community**: For the excellent framework and documentation
 - **Open Source Community**: For the amazing tools and libraries
+
+## 📞 Support
+
+- **GitHub Issues**: [Report bugs or request features](https://github.com/yazzy01/alx-project-nexus/issues)
+- **Discord**: Join `#ProDevProjectNexus` channel
+- **Documentation**: Check the API docs at `/api/docs/`
 
 ---
 
-**Built with ❤️ by the ALX ProDev Backend Engineering Community**
+**Built with ❤️ for the ALX ProDev Backend Engineering Program**
 
-*This repository is part of the ALX ProDev Backend Engineering Program and serves as a testament to the skills and knowledge acquired during this intensive learning journey.*
+*This project demonstrates real-world backend development practices and serves as a portfolio piece showcasing advanced Django REST Framework skills.*

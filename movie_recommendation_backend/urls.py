@@ -24,6 +24,7 @@ from django.conf.urls.static import static
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
+from movies.views import health_check
 
 def redirect_to_frontend(request):
     """Redirect root URL to frontend"""
@@ -46,6 +47,9 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
+    # Health check for Railway
+    path('api/health/', health_check, name='health-check'),
+    
     # Root URL redirect
     path('', redirect_to_frontend, name='home'),
     

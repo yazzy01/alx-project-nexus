@@ -5,6 +5,7 @@ from rest_framework.pagination import PageNumberPagination
 from django.shortcuts import get_object_or_404
 from django.db.models import Q, Avg
 from django.core.cache import cache
+from django.http import JsonResponse
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
 import logging
@@ -22,6 +23,17 @@ from .services import tmdb_service, recommendation_service
 from users.models import UserActivity
 
 logger = logging.getLogger(__name__)
+
+
+@api_view(['GET'])
+@permission_classes([permissions.AllowAny])
+def health_check(request):
+    """Health check endpoint for Railway deployment"""
+    return JsonResponse({
+        'status': 'healthy',
+        'service': 'movie-recommendation-api',
+        'version': '1.0.0'
+    })
 
 
 class StandardResultsSetPagination(PageNumberPagination):

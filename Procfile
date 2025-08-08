@@ -1,1 +1,1 @@
-web: bash start.sh
+web: python manage.py collectstatic --noinput && gunicorn movie_recommendation_backend.wsgi:application --bind 0.0.0.0:$PORT

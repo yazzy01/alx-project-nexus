@@ -18,13 +18,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.shortcuts import redirect
+from django.views.generic import TemplateView
+from django.conf import settings
+from django.conf.urls.static import static
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 
-def redirect_to_docs(request):
-    """Redirect root URL to API documentation"""
-    return redirect('/api/docs/')
+def redirect_to_frontend(request):
+    """Redirect root URL to frontend"""
+    return redirect('/frontend/')
 
 # Swagger/OpenAPI schema configuration
 schema_view = get_schema_view(
@@ -44,7 +47,10 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     # Root URL redirect
-    path('', redirect_to_docs, name='home'),
+    path('', redirect_to_frontend, name='home'),
+    
+    # Frontend
+    path('frontend/', TemplateView.as_view(template_name='frontend/index.html'), name='frontend'),
     
     # Admin interface
     path("admin/", admin.site.urls),

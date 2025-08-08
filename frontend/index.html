@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Recommendation API - ALX Project Nexus</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .hero-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 2rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .feature-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 1rem 0;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        .api-link {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-block;
+            margin: 0.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        .api-link:hover {
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+        .github-link {
+            background: linear-gradient(45deg, #2c3e50, #34495e);
+        }
+        .docs-link {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+        }
+        .tech-badge {
+            background: rgba(52, 152, 219, 0.1);
+            color: #2980b9;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            margin: 0.25rem;
+            display: inline-block;
+            border: 1px solid rgba(52, 152, 219, 0.3);
+        }
+        .stats-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            margin: 0.5rem 0;
+        }
+        .demo-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero-section text-center text-white">
+            <h1 class="display-4 mb-4">
+                <i class="fas fa-film me-3"></i>
+                Movie Recommendation API
+            </h1>
+            <p class="lead mb-4">
+                A comprehensive Django REST Framework backend for personalized movie recommendations
+            </p>
+            <p class="mb-4">
+                <strong>ALX Project Nexus - ProDev Backend Engineering</strong>
+            </p>
+            
+            <!-- API Links -->
+            <div class="mb-4">
+                <a href="/api/docs/" class="api-link docs-link" target="_blank">
+                    <i class="fas fa-book me-2"></i>
+                    API Documentation
+                </a>
+                <a href="https://github.com/yazzy01/alx-project-nexus" class="api-link github-link" target="_blank">
+                    <i class="fab fa-github me-2"></i>
+                    GitHub Repository
+                </a>
+                <a href="/admin/" class="api-link" target="_blank">
+                    <i class="fas fa-cog me-2"></i>
+                    Admin Interface
+                </a>
+            </div>
+        </div>
+
+        <!-- Project Stats -->
+        <div class="row">
+            <div class="col-md-3">
+                <div class="stats-card">
+                    <h3><i class="fas fa-film"></i></h3>
+                    <h4>80+</h4>
+                    <p>Real Movies</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card">
+                    <h3><i class="fas fa-tags"></i></h3>
+                    <h4>19</h4>
+                    <p>Movie Genres</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card">
+                    <h3><i class="fas fa-code"></i></h3>
+                    <h4>25+</h4>
+                    <p>API Endpoints</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card">
+                    <h3><i class="fas fa-database"></i></h3>
+                    <h4>10</h4>
+                    <p>Database Models</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Features -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="feature-card">
+                    <h4><i class="fas fa-search text-primary me-2"></i>Movie Discovery</h4>
+                    <ul>
+                        <li>Browse trending, popular, and top-rated movies</li>
+                        <li>Advanced search with filters</li>
+                        <li>Genre-based categorization</li>
+                        <li>Real-time TMDb integration</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="feature-card">
+                    <h4><i class="fas fa-user text-success me-2"></i>User Management</h4>
+                    <ul>
+                        <li>Secure user registration & authentication</li>
+                        <li>Token-based API access</li>
+                        <li>User profiles and preferences</li>
+                        <li>Activity tracking and analytics</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="feature-card">
+                    <h4><i class="fas fa-heart text-danger me-2"></i>Personal Features</h4>
+                    <ul>
+                        <li>Favorite movies collection</li>
+                        <li>Personal watchlist management</li>
+                        <li>Movie ratings and reviews</li>
+                        <li>Personalized recommendations</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="feature-card">
+                    <h4><i class="fas fa-rocket text-warning me-2"></i>Technical Excellence</h4>
+                    <ul>
+                        <li>Redis caching for performance</li>
+                        <li>Celery background tasks</li>
+                        <li>Comprehensive API documentation</li>
+                        <li>Docker deployment ready</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Technology Stack -->
+        <div class="demo-section">
+            <h3 class="text-center mb-4">
+                <i class="fas fa-tools me-2"></i>
+                Technology Stack
+            </h3>
+            <div class="text-center">
+                <span class="tech-badge">Django 5.2.5</span>
+                <span class="tech-badge">Django REST Framework</span>
+                <span class="tech-badge">PostgreSQL</span>
+                <span class="tech-badge">Redis</span>
+                <span class="tech-badge">Celery</span>
+                <span class="tech-badge">TMDb API</span>
+                <span class="tech-badge">Swagger/OpenAPI</span>
+                <span class="tech-badge">Docker</span>
+                <span class="tech-badge">Token Authentication</span>
+            </div>
+        </div>
+
+        <!-- API Demo Section -->
+        <div class="demo-section">
+            <h3 class="text-center mb-4">
+                <i class="fas fa-play-circle me-2"></i>
+                Live API Demo
+            </h3>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>🎬 Get Popular Movies</h5>
+                    <button class="btn btn-primary" onclick="fetchPopularMovies()">
+                        <i class="fas fa-download me-2"></i>
+                        Fetch Movies
+                    </button>
+                    <div id="movies-result" class="mt-3"></div>
+                </div>
+                <div class="col-md-6">
+                    <h5>🏷️ Get Movie Genres</h5>
+                    <button class="btn btn-success" onclick="fetchGenres()">
+                        <i class="fas fa-tags me-2"></i>
+                        Fetch Genres
+                    </button>
+                    <div id="genres-result" class="mt-3"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="text-center text-white mt-5 mb-3">
+            <p>
+                <strong>Built with ❤️ for ALX ProDev Backend Engineering Program</strong>
+            </p>
+            <p>
+                <i class="fas fa-code me-2"></i>
+                Demonstrating real-world backend development skills
+            </p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // API Base URL - Update this when deployed
+        const API_BASE = window.location.origin;
+
+        async function fetchPopularMovies() {
+            const resultDiv = document.getElementById('movies-result');
+            resultDiv.innerHTML = '<div class="spinner-border text-primary" role="status"></div>';
+            
+            try {
+                const response = await fetch(`${API_BASE}/api/v1/movies/recommendations/?type=popular`);
+                const movies = await response.json();
+                
+                let html = '<div class="row">';
+                movies.slice(0, 4).forEach(movie => {
+                    html += `
+                        <div class="col-md-6 mb-2">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h6 class="card-title">${movie.title}</h6>
+                                    <p class="card-text">
+                                        <small class="text-muted">
+                                            ⭐ ${movie.vote_average}/10 | 
+                                            📅 ${movie.release_date || 'Unknown'}
+                                        </small>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+                html += '</div>';
+                resultDiv.innerHTML = html;
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="alert alert-danger">Error: ${error.message}</div>`;
+            }
+        }
+
+        async function fetchGenres() {
+            const resultDiv = document.getElementById('genres-result');
+            resultDiv.innerHTML = '<div class="spinner-border text-success" role="status"></div>';
+            
+            try {
+                const response = await fetch(`${API_BASE}/api/v1/movies/genres/`);
+                const genres = await response.json();
+                
+                let html = '<div class="d-flex flex-wrap">';
+                genres.forEach(genre => {
+                    html += `<span class="badge bg-secondary me-1 mb-1">${genre.name}</span>`;
+                });
+                html += '</div>';
+                resultDiv.innerHTML = html;
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="alert alert-danger">Error: ${error.message}</div>`;
+            }
+        }
+
+        // Auto-load some data on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // You can auto-load some data here if needed
+        });
+    </script>
+</body>
+</html>

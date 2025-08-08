@@ -31,6 +31,7 @@ pytz==2025.2
 # Production dependencies
 gunicorn==23.0.0
 whitenoise==6.8.2
+dj-database-url==2.1.0
 
 # Development dependencies (optional)
 # django-debug-toolbar==4.2.0

@@ -253,6 +253,8 @@
         // API Base URL - Update this when deployed
         const API_BASE = window.location.origin;
 
+        let movieOffset = 0;
+        
         async function fetchPopularMovies() {
             const resultDiv = document.getElementById('movies-result');
             resultDiv.innerHTML = '<div class="spinner-border text-primary" role="status"></div>';
@@ -261,8 +263,17 @@
                 const response = await fetch(`${API_BASE}/api/v1/movies/recommendations/?type=popular`);
                 const movies = await response.json();
                 
+                // Show different movies each time by using offset
+                const startIndex = movieOffset % movies.length;
+                const selectedMovies = movies.slice(startIndex, startIndex + 4);
+                
+                // If we don't have enough movies, wrap around
+                if (selectedMovies.length < 4) {
+                    selectedMovies.push(...movies.slice(0, 4 - selectedMovies.length));
+                }
+                
                 let html = '<div class="row">';
-                movies.slice(0, 4).forEach(movie => {
+                selectedMovies.forEach(movie => {
                     html += `
                         <div class="col-md-6 mb-2">
                             <div class="card">
@@ -280,7 +291,11 @@
                     `;
                 });
                 html += '</div>';
+                html += '<p class="text-muted mt-2"><small>Click again to see more movies!</small></p>';
                 resultDiv.innerHTML = html;
+                
+                // Increment offset for next click
+                movieOffset += 4;
             } catch (error) {
                 resultDiv.innerHTML = `<div class="alert alert-danger">Error: ${error.message}</div>`;
             }
@@ -292,7 +307,10 @@
             
             try {
                 const response = await fetch(`${API_BASE}/api/v1/movies/genres/`);
-                const genres = await response.json();
+                const data = await response.json();
+                
+                // Handle both paginated and non-paginated responses
+                const genres = data.results || data;
                 
                 let html = '<div class="d-flex flex-wrap">';
                 genres.forEach(genre => {

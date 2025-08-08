@@ -50,7 +50,7 @@ urlpatterns = [
     path('', redirect_to_frontend, name='home'),
     
     # Frontend
-    path('frontend/', TemplateView.as_view(template_name='frontend/index.html'), name='frontend'),
+    path('frontend/', TemplateView.as_view(template_name='index.html'), name='frontend'),
     
     # Admin interface
     path("admin/", admin.site.urls),

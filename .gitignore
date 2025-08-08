@@ -159,3 +159,4 @@ local_settings.py
 
 # Redis dump
 dump.rdb
+.vercel

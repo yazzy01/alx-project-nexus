@@ -2,12 +2,11 @@
   "version": 2,
   "builds": [
     {
-      "src": "vercel_app.py",
+      "src": "api/index.py",
       "use": "@vercel/python",
-      "config": { 
-        "maxLambdaSize": "15mb", 
-        "runtime": "python3.9",
-        "maxDuration": 10
+      "config": {
+        "maxLambdaSize": "15mb",
+        "runtime": "python3.9"
       }
     },
     {
@@ -18,19 +17,27 @@
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "/vercel_app.py"
+      "dest": "/api"
     },
     {
-      "src": "/admin(.*)",
-      "dest": "/vercel_app.py"
+      "src": "/admin(/?.*)",
+      "dest": "/api"
     },
     {
-      "src": "/static/(.*)",
-      "dest": "/vercel_app.py"
+      "src": "/docs(/?.*)",
+      "dest": "/api"
     },
     {
-      "src": "/(.*\\.(css|js|png|jpg|jpeg|gif|svg|ico))",
+      "src": "/health",
+      "dest": "/api"
+    },
+    {
+      "src": "/(.*\\.(js|css|png|jpg|jpeg|gif|ico|svg))",
       "dest": "/frontend/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/frontend/index.html"
     },
     {
       "src": "/",

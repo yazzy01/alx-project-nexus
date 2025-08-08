@@ -2,18 +2,47 @@
   "version": 2,
   "builds": [
     {
-      "src": "frontend/index.html",
+      "src": "vercel_app.py",
+      "use": "@vercel/python",
+      "config": { 
+        "maxLambdaSize": "15mb", 
+        "runtime": "python3.9"
+      }
+    },
+    {
+      "src": "frontend/**",
       "use": "@vercel/static"
     }
   ],
   "routes": [
     {
-      "src": "/(.*)",
+      "src": "/api/(.*)",
+      "dest": "/vercel_app.py"
+    },
+    {
+      "src": "/admin(.*)",
+      "dest": "/vercel_app.py"
+    },
+    {
+      "src": "/static/(.*)",
+      "dest": "/vercel_app.py"
+    },
+    {
+      "src": "/(.*\\.(css|js|png|jpg|jpeg|gif|svg|ico))",
       "dest": "/frontend/$1"
     },
     {
       "src": "/",
       "dest": "/frontend/index.html"
     }
-  ]
+  ],
+  "env": {
+    "PYTHONPATH": ".",
+    "DJANGO_SETTINGS_MODULE": "movie_recommendation_backend.settings"
+  },
+  "functions": {
+    "vercel_app.py": {
+      "maxDuration": 10
+    }
+  }
 }

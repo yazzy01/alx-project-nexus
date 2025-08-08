@@ -27,7 +27,24 @@ SECRET_KEY = config('SECRET_KEY', default="django-insecure-hvtoa6*i@7@td!$f0$x_!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=True, cast=bool)
 
-ALLOWED_HOSTS = ['*']  # Allow all hosts for Railway deployment
+# TMDB API Key for movie data
+TMDB_API_KEY = config('TMDB_API_KEY', default='')
+
+ALLOWED_HOSTS = ['*']  # Allow all hosts for deployment
+
+# Vercel-specific settings
+if 'VERCEL' in os.environ:
+    ALLOWED_HOSTS = ['*']
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': '/tmp/db.sqlite3',  # Use /tmp for serverless
+        }
+    }
+    # Disable migrations on Vercel (serverless)
+    MIGRATION_MODULES = {
+        app: None for app in INSTALLED_APPS if not app.startswith('django.')
+    }
 
 
 # Application definition

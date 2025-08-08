@@ -38,13 +38,19 @@ if 'VERCEL' in os.environ:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': '/tmp/db.sqlite3',  # Use /tmp for serverless
+            'NAME': ':memory:',  # Use in-memory database for serverless
         }
     }
     # Disable migrations on Vercel (serverless)
     MIGRATION_MODULES = {
-        app: None for app in INSTALLED_APPS if not app.startswith('django.')
+        'movies': None,
+        'users': None,
     }
+    # Disable logging to avoid file system issues
+    LOGGING_CONFIG = None
+    # Disable static files collection
+    STATIC_URL = '/static/'
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 # Application definition

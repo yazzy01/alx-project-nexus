@@ -1,24 +1,73 @@
+# Simple API handler for Vercel without Django complexity
+import json
 import os
-import sys
-from pathlib import Path
+from urllib.parse import urlparse, parse_qs
 
-# Add the project directory to Python path
-BASE_DIR = Path(__file__).resolve().parent
-sys.path.insert(0, str(BASE_DIR))
+# Set environment variables
+os.environ.setdefault('TMDB_API_KEY', os.getenv('TMDB_API_KEY', ''))
 
-# Set environment variables for Vercel
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'movie_recommendation_backend.settings')
-os.environ.setdefault('VERCEL', '1')
+def create_response(status_code, data, headers=None):
+    """Create a proper HTTP response"""
+    if headers is None:
+        headers = {'Content-Type': 'application/json'}
+    
+    return {
+        'statusCode': status_code,
+        'headers': headers,
+        'body': json.dumps(data)
+    }
 
-# Initialize Django
-import django
-from django.core.wsgi import get_wsgi_application
-
-# Setup Django
-django.setup()
-
-# Get the WSGI application
-application = get_wsgi_application()
+def handler(request):
+    """Main Vercel handler"""
+    try:
+        # Parse the request
+        method = getattr(request, 'method', 'GET')
+        url = getattr(request, 'url', None)
+        path = url.path if url else '/'
+        
+        # Health check endpoint
+        if path == '/api/health/' or path == '/api/health':
+            return create_response(200, {
+                'status': 'healthy',
+                'service': 'movie-recommendation-api',
+                'version': '1.0.0',
+                'message': 'API is running on Vercel!'
+            })
+        
+        # API documentation redirect
+        elif path.startswith('/api/docs'):
+            return create_response(200, {
+                'message': 'API Documentation',
+                'endpoints': {
+                    'health': '/api/health/',
+                    'movies': '/api/v1/movies/',
+                    'genres': '/api/v1/genres/'
+                },
+                'note': 'Full Django backend coming soon!'
+            })
+        
+        # Admin interface placeholder
+        elif path.startswith('/admin'):
+            return create_response(200, {
+                'message': 'Admin Interface',
+                'note': 'Django admin will be available once backend is fully deployed',
+                'status': 'placeholder'
+            })
+        
+        # Default response
+        else:
+            return create_response(404, {
+                'error': 'Endpoint not found',
+                'path': path,
+                'available_endpoints': ['/api/health/', '/api/docs/', '/admin/']
+            })
+            
+    except Exception as e:
+        return create_response(500, {
+            'error': 'Internal server error',
+            'message': str(e),
+            'type': 'handler_error'
+        })
 
 # Vercel expects the app to be named 'app'
-app = application
+app = handler

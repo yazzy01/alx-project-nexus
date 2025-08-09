@@ -374,6 +374,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-**Built with ❤️ for the ALX ProDev Backend Engineering Program**
+**Built By Yassir Rzigui with ❤️ for the ALX ProDev Backend Engineering Program**
 
 *This project demonstrates real-world backend development practices and serves as a portfolio piece showcasing advanced Django REST Framework skills.*
